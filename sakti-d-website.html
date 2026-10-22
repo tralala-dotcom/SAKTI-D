@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SAKTI-D: Latihan Jadi Saksi Digital</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F4F7FA;--card:#FFFFFF;--tx:#12203A;--mu:#566377;--ac:#0E8C8A;--acs:#DDF2F1;--bd:#D8E0E8;--ok:#1F8F5F;--oks:#E1F4EA;--wn:#B8741A;--wns:#FBEFD9;--rk:#C84642;--rks:#FBE4E3;--hd:#12203A;--hdt:#FFFFFF;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0C1626;--card:#15233A;--tx:#EAF0F7;--mu:#9DABBD;--ac:#3CC3C0;--acs:#143A44;--bd:#28384F;--ok:#52C98E;--oks:#143A2C;--wn:#E8A94E;--wns:#3A2B12;--rk:#F0847F;--rks:#3E1D1E;--hd:#0A111D}}
+:root[data-theme="dark"]{--bg:#0C1626;--card:#15233A;--tx:#EAF0F7;--mu:#9DABBD;--ac:#3CC3C0;--acs:#143A44;--bd:#28384F;--ok:#52C98E;--oks:#143A2C;--wn:#E8A94E;--wns:#3A2B12;--rk:#F0847F;--rks:#3E1D1E;--hd:#0A111D}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 Figtree,system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--hd);z-index:10}
+h1,h2,h3{font-family:"Bricolage Grotesque",Figtree,sans-serif;line-height:1.12;margin:0}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--hd);color:var(--hdt);display:flex;justify-content:space-between;align-items:center;padding:12px 18px}
+.logo{font:800 20px "Bricolage Grotesque",sans-serif;cursor:pointer;letter-spacing:.2px}.logo i{color:#3CC3C0;font-style:normal}
+.help{background:transparent;color:var(--hdt);border:1.5px solid #ffffff66;border-radius:99px;padding:6px 13px;font:500 14px Figtree,sans-serif;cursor:pointer}
+main{max-width:480px;margin:0 auto;padding:22px 18px 60px}
+.btn{display:block;width:100%;border:0;border-radius:14px;padding:15px 18px;background:var(--ac);color:#fff;font:700 16px Figtree,sans-serif;cursor:pointer;text-align:center}
+.btn.ghost{background:transparent;color:var(--ac);border:1.5px solid var(--ac);margin-top:10px}
+:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+.hero h1{font-size:40px;font-weight:800;margin:10px 0 14px}
+.hero p{color:var(--mu);margin:0 0 22px;font-size:17px}
+.chatpeek{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:14px;margin:0 0 22px}
+.msg{display:flex;gap:9px;margin:7px 0;align-items:flex-end}.av{width:28px;height:28px;border-radius:50%;background:var(--acs);color:var(--ac);display:grid;place-items:center;font:700 12px Figtree}
+.bub{background:var(--bg);border-radius:14px 14px 14px 4px;padding:8px 12px;font-size:14.5px;max-width:82%}
+.pause{margin-top:12px;padding:10px 12px;border-radius:12px;background:var(--acs);color:var(--tx);font-weight:700;font-size:14.5px}
+.facts{list-style:none;padding:0;margin:22px 0 0;display:grid;gap:12px}.facts li{display:flex;gap:12px;color:var(--mu);font-size:15px}.facts b{color:var(--tx)}
+.facts span{flex:0 0 34px;height:34px;border-radius:10px;background:var(--acs);display:grid;place-items:center;font-size:17px}
+h2{font-size:28px;font-weight:800;margin-bottom:6px}.sub{color:var(--mu);margin:0 0 18px}
+.case{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:16px;margin-bottom:12px}
+.case h3{font-size:20px;margin-bottom:4px}.case p{margin:0 0 12px;color:var(--mu);font-size:15px}.meta{font-size:13px;color:var(--mu);margin-bottom:12px}
+.case.lock{opacity:.6}.case.lock .btn{background:var(--bd);color:var(--mu);cursor:default}
+.steps{display:flex;gap:6px;margin-bottom:18px}.steps i{flex:1;height:6px;border-radius:9px;background:var(--bd)}.steps i.on{background:var(--ac)}
+.steplab{font-size:13px;color:var(--mu);margin:-10px 0 16px}
+.chat{background:var(--card);border:1px solid var(--bd);border-radius:18px;overflow:hidden;margin-bottom:18px}
+.chat .top{padding:10px 14px;border-bottom:1px solid var(--bd);font-weight:700;font-size:14px}.chat .top span{color:var(--mu);font-weight:400}
+.chat .body{padding:8px 14px 14px}
+.photo{margin:6px 0 4px 37px;width:150px;height:96px;border-radius:12px;background:repeating-linear-gradient(45deg,var(--acs) 0 10px,var(--bg) 10px 20px);display:grid;place-items:center;font-size:12px;color:var(--mu);border:1px solid var(--bd)}
+.react{margin-left:37px;font-size:13px;color:var(--mu)}
+.q{font:800 22px "Bricolage Grotesque",sans-serif;margin:0 0 4px}
+.opt{display:block;width:100%;text-align:left;background:var(--card);border:1.5px solid var(--bd);border-radius:14px;padding:14px;margin-top:10px;font:500 15.5px/1.4 Figtree,sans-serif;color:var(--tx);cursor:pointer}
+.opt:hover{border-color:var(--ac)}.opt[aria-pressed=true]{border-color:var(--ac);background:var(--acs)}
+.tier{border-radius:16px;padding:16px;margin-bottom:14px}.tier h3{font-size:20px;margin-bottom:6px}.tier p{margin:0}
+.t-ok{background:var(--oks)}.t-ok h3{color:var(--ok)}.t-wn{background:var(--wns)}.t-wn h3{color:var(--wn)}.t-rk{background:var(--rks)}.t-rk h3{color:var(--rk)}
+.panel{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:16px;margin-bottom:14px}
+.panel h3{font-size:17px;margin-bottom:8px}.panel p{margin:0;font-size:15px;color:var(--mu)}
+.bar{height:12px;border-radius:9px;background:var(--bd);margin:6px 0 12px;overflow:hidden}.bar div{height:100%;background:var(--ac);border-radius:9px;transition:width .6s}
+.bar.r div{background:var(--rk)}.lab{display:flex;justify-content:space-between;font-size:13.5px;color:var(--mu)}
+details{margin-top:2px}summary{cursor:pointer;font-weight:700;font-size:15.5px;padding:4px 0}
+ol.safe{margin:8px 0 0;padding-left:20px;color:var(--mu);font-size:15px}ol.safe li{margin-bottom:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.chip{border:1.5px solid var(--bd);background:var(--card);border-radius:99px;padding:8px 13px;font:500 14.5px Figtree,sans-serif;color:var(--tx);cursor:pointer}
+.chip[aria-pressed=true]{background:var(--acs);border-color:var(--ac)}
+.reply{margin-top:12px;color:var(--tx);font-size:15px}
+.card-sk{text-align:center;background:linear-gradient(160deg,var(--acs),var(--card));border:1.5px solid var(--ac);border-radius:20px;padding:26px 18px;margin:8px 0 18px}
+.card-sk .ic{font-size:46px}.card-sk h3{font-size:24px;margin:8px 0 4px}.card-sk p{margin:0;color:var(--mu);font-size:15px}
+.prog{display:grid;gap:8px;margin:0 0 20px}.prog div{display:flex;justify-content:space-between;font-size:15px;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:10px 14px}.prog em{font-style:normal;color:var(--mu)}
+.sheet{position:fixed;inset:0;background:#0009;display:none;align-items:flex-end;justify-content:center;z-index:20}.sheet.on{display:flex}
+.sheet div{background:var(--card);width:100%;max-width:480px;border-radius:22px 22px 0 0;padding:22px 20px calc(22px + env(safe-area-inset-bottom,0px))}
+.sheet h3{font-size:22px;margin-bottom:8px}.sheet p{color:var(--mu);margin:0 0 16px}
+.view{display:none}.view.on{display:block;animation:in .25s}@keyframes in{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.view.on{animation:none}.bar div{transition:none}}
+.q{scroll-margin-top:130px}
+.meters{position:sticky;top:calc(env(safe-area-inset-top,0px) + 54px);z-index:8;background:var(--bg);padding:8px 0 4px;display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 10px}
+.meters span{font-size:12.5px;color:var(--mu);display:block}.meters b{font-size:13px}.meters .bar{margin:4px 0 0;height:9px}
+.dots{display:inline-flex;gap:4px;padding:5px 0}.dots i{width:7px;height:7px;border-radius:50%;background:var(--mu);animation:bl 1s infinite}.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}@keyframes bl{50%{opacity:.25}}
+.pill{text-align:center;font-size:13px;color:var(--ac);background:var(--acs);border-radius:99px;padding:5px 12px;margin:10px auto;width:max-content;max-width:100%}
+.link{background:none;border:0;color:var(--ac);font:700 14.5px Figtree,sans-serif;padding:0 0 10px;cursor:pointer}
+.opt.done{opacity:.5;pointer-events:none}.opt.pick{border-color:var(--ac);background:var(--acs)}
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 10px}.sk{border:1.5px solid var(--bd);background:var(--card);border-radius:14px;padding:12px;text-align:center;font:500 14px Figtree,sans-serif;color:var(--tx);cursor:pointer}.sk .e{font-size:28px;display:block}.sk.lk{opacity:.55;filter:grayscale(1)}.sk.on{border-color:var(--ac);background:var(--acs)}
+.sdesc{color:var(--mu);font-size:14.5px;margin:0 0 10px;min-height:22px}
+.badge{font-size:12.5px;background:var(--oks);color:var(--ok);border-radius:99px;padding:2px 9px;margin-left:8px;font-weight:700;font-family:Figtree,sans-serif;vertical-align:middle}
+.ol{list-style:none;padding:0;margin:0}.ol li{padding:8px 0;border-bottom:1px solid var(--bd);font-size:14.5px}
+.fa{fill:var(--ac)}.fs{fill:var(--acs)}.fc{fill:var(--card)}.fb2{fill:var(--bd)}.fh{fill:var(--hd)}.fr{fill:var(--rk)}.fw{fill:var(--wn)}.ta{fill:var(--ac)}
+.art{margin:0 0 6px}.art svg{width:100%;height:auto;display:block}
+.bb{opacity:0;animation:pop 6s infinite}.b2{animation-delay:1.2s}.b3{animation-delay:2.4s}@keyframes pop{0%{opacity:0;transform:translateY(8px)}8%,72%{opacity:1;transform:none}92%,100%{opacity:0}}
+.pz{transform-origin:160px 142px;animation:pu 2s infinite}@keyframes pu{50%{transform:scale(1.14)}}
+.fl{animation:fl 3s ease-in-out infinite}.fl2{animation:fl 3s ease-in-out 1s infinite}@keyframes fl{50%{transform:translateY(-6px)}}
+svg.av{background:none;flex:0 0 28px}
+.ci{float:right;margin:0 0 6px 10px}
+.dm{display:grid;grid-template-columns:repeat(16,1fr);gap:5px}.dm i{aspect-ratio:1;border-radius:50%;background:var(--bd)}.dm i.x{background:var(--ac);animation:dp .4s both}.dm i.x.r{background:var(--rk)}@keyframes dp{from{transform:scale(0)}}
+.win{text-align:center;margin:4px 0 10px;animation:wp .6s cubic-bezier(.3,1.6,.5,1)}@keyframes wp{from{transform:scale(.3);opacity:0}}
+.intro{position:fixed;inset:0;z-index:30;background:#0A111D;color:#fff;display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:calc(20px + env(safe-area-inset-top,0px)) 20px calc(20px + env(safe-area-inset-bottom,0px))}.intro.on{display:flex}
+.skip{position:absolute;right:16px;top:calc(14px + env(safe-area-inset-top,0px));background:#ffffff22;color:#fff;border:0;border-radius:99px;padding:7px 14px;font:500 14px Figtree,sans-serif;cursor:pointer}
+.clk{font:800 34px "Bricolage Grotesque",sans-serif}.notif{background:#ffffff1f;border-radius:16px;padding:12px 16px;width:min(320px,100%);animation:sd .5s both}.notif b{display:block}.notif span{font-size:14px;opacity:.8}@keyframes sd{from{transform:translateY(-30px);opacity:0}}
+.ph{width:min(280px,100%);min-height:150px;background:#fff;color:#12203A;border-radius:22px;padding:12px;border:6px solid #1f2d46}.ph .msg{animation:in .3s}.ph .bub{background:#EAF0F5}
+.chat .top.wa{background:#DCF8C6;color:#12331a}.chat .top.tt{background:#111;color:#fff}.chat .top.ig{background:linear-gradient(90deg,#f09433,#dc2743,#bc1888);color:#fff}.chat .top.wa span{color:#2d5a3a}.chat .top.tt span,.chat .top.ig span{color:#ffffffcc}
+.scene{margin:0 0 12px;border-radius:18px;overflow:hidden;background:var(--acs)}.scene svg{display:block;width:100%;height:auto}
+.bn{animation:bn .5s ease-in-out infinite alternate}@keyframes bn{to{transform:translateY(-4px)}}
+.aL{transform-origin:150px 96px;animation:sw .55s ease-in-out infinite alternate}.aR{transform-origin:170px 96px;animation:sw2 .55s ease-in-out infinite alternate}
+@keyframes sw{from{transform:rotate(-70deg)}to{transform:rotate(40deg)}}@keyframes sw2{from{transform:rotate(70deg)}to{transform:rotate(-40deg)}}
+#fx{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:25}
+#fx span{position:absolute;top:0;animation:fd var(--d) linear both}#fx span.up{top:auto;bottom:0;animation-name:fu}
+@keyframes fd{from{transform:translateY(-12vh) rotate(0)}to{transform:translateY(110vh) rotate(var(--r))}}
+@keyframes fu{from{transform:translateY(12vh) scale(.6);opacity:1}to{transform:translateY(-105vh) scale(1.3);opacity:.2}}
+.shake{animation:shk .45s}@keyframes shk{20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-5px)}80%{transform:translateX(4px)}}
+body{transition:background .5s}body.good{background:#17784A}.good .meters{background:#17784A}.good .q,.good .meters span,.good .meters b,.good .link{color:#fff}.good .meters .bar{background:#ffffff55}
+body.bad{background:#C62828}.bad .meters{background:#C62828}.bad .q,.bad .meters span,.bad .meters b,.bad .link{color:#fff}.bad .meters .bar{background:#ffffff55}
+.vic{margin:0 0 12px;animation:wp .5s}.vic svg{display:block;width:100%;height:auto;border-radius:16px}
+.fld{width:100%;padding:12px;border:1.5px solid var(--bd);border-radius:12px;background:var(--card);color:var(--tx);font:16px Figtree,sans-serif}
+.view label{display:block;font-weight:700;margin:16px 0 6px;font-size:15px}.ck{display:flex;gap:10px;align-items:center;margin:14px 0}.ck input{width:20px;height:20px}
+.lr{display:flex;gap:4px;justify-content:center;margin-top:6px;flex-wrap:wrap}
+.how li{margin-bottom:8px}.big{font:800 24px "Bricolage Grotesque",sans-serif;color:var(--ac);margin:4px 0 14px}
+.mn{display:grid;grid-template-columns:1fr 1fr;gap:10px}.mi{display:flex;flex-direction:column;align-items:center;gap:6px;background:var(--card);border:1.5px solid var(--bd);border-radius:14px;padding:14px 8px;font:700 14px Figtree,sans-serif;color:var(--tx);cursor:pointer}.mi span{font-size:24px}
+.cnt{font:800 26px "Bricolage Grotesque",sans-serif}.cap{margin:0;opacity:.85;text-align:center;font-size:16px}
+@media (prefers-reduced-motion:reduce){.bb{opacity:1;animation:none}.aL,.aR,.bn,.shake,.vic{animation:none}.pz,.fl,.fl2,.win,.dm i.x{animation:none}}
+</style>
+</head>
+<body>
+<header><div class="logo" onclick="go('home')" role="button" tabindex="0">SAKTI<i>-D</i></div><button class="help" onclick="sheet(true)">Butuh bantuan?</button></header>
+<main>
+
+<section class="view on" id="home">
+ <div class="hero"><div class="art"><svg viewBox="0 0 320 190" role="img" aria-label="Ilustrasi dua pelajar dan ponsel berisi grup chat"><ellipse class="fs" cx="160" cy="100" rx="150" ry="84"/><rect class="fh" x="110" y="14" width="100" height="164" rx="16"/><rect class="fc" x="116" y="24" width="88" height="144" rx="10"/><g class="bb"><rect class="fb2" x="122" y="36" width="60" height="20" rx="8"/><circle class="fa" cx="131" cy="46" r="4"/></g><g class="bb b2"><rect class="fb2" x="130" y="64" width="66" height="20" rx="8"/><circle class="fw" cx="187" cy="74" r="4"/></g><g class="bb b3"><rect class="fb2" x="122" y="92" width="56" height="20" rx="8"/><circle class="fr" cx="131" cy="102" r="4"/></g><g class="pz"><circle class="fa" cx="160" cy="142" r="15"/><rect x="154" y="135" width="4" height="14" rx="1.5" fill="#fff"/><rect x="162" y="135" width="4" height="14" rx="1.5" fill="#fff"/></g><path class="fa" d="M20 180a28 32 0 0 1 56 0z"/><circle cx="48" cy="112" r="17" fill="#F2C9A0"/><path d="M31 110a17 17 0 0 1 34 0c-6-7-28-7-34 0z" fill="#2B2F4A"/><path class="fw" d="M244 180a28 32 0 0 1 56 0z"/><circle cx="272" cy="112" r="17" fill="#E8B48A"/><path d="M255 110a17 17 0 0 1 34 0c-6-7-28-7-34 0z" fill="#5A3A22"/><text class="fl" x="58" y="72" font-size="24">😂</text><text class="fl2" x="236" y="70" font-size="24">⏸️</text></svg></div>
+  <h1>Kamu melihatnya. Sekarang, apa yang kamu lakukan?</h1>
+  <p>Latihan 5 menit untuk memilih tindakan yang aman saat melihat perundungan di grup chat dan media sosial.</p>
+ </div>
+ <div class="chatpeek" aria-hidden="true">
+  <div class="msg"><div class="av">D</div><div class="bub">Wkwk lihat foto ini</div></div>
+  <div class="msg"><div class="av">S</div><div class="bub">Kasihan sih, tapi lucu juga</div></div>
+  <div class="pause">⏸ Jeda. Kamu yang memutuskan langkah berikutnya.</div>
+ </div>
+ <button class="btn" onclick="go('cases')">Mulai latihan</button>
+ <ul class="facts">
+  <li><span>🎭</span><div><b>Cerita fiktif.</b> Semua nama dan kejadian rekaan, tidak ada yang berasal dari siswa sungguhan.</div></li>
+  <li><span>🔒</span><div><b>Tanpa akun.</b> Kamu tidak perlu mengisi nama atau email.</div></li>
+  <li><span>🧭</span><div><b>Tanpa nilai salah atau benar.</b> Kamu melihat dampak tiap pilihan, lalu merefleksikannya.</div></li>
+ </ul>
+</section>
+
+<section class="view" id="cases">
+ <h2>Pilih kasus</h2><p class="sub">Setiap kasus punya dua keputusan yang saling berkaitan.</p><div class="chips" id="md"></div><p class="sdesc" id="mdd" style="margin-top:8px"></p>
+ <div id="cl"></div>
+ <h2 style="font-size:22px;margin-top:22px">Kartu keterampilan</h2><div class="sg" id="sg"></div><p class="sdesc" id="sd"></p>
+</section>
+
+<section class="view" id="play">
+ <button class="link" onclick="go('cases')">‹ Daftar kasus</button>
+ <div class="meters"><div><span>Rasa aman korban</span><b id="sfv"></b><div class="bar"><div id="sfb"></div></div></div><div><span>Penyebaran konten</span><b id="spv"></b><div class="bar r"><div id="spb"></div></div></div></div>
+ <div class="scene" id="scene"></div><div class="chat"><div class="top" id="ctop"></div><div class="body" id="feed"></div></div>
+ <p class="q" id="q"></p><div id="opts"></div><div id="fb" style="margin-top:16px"></div>
+</section>
+
+<section class="view" id="how">
+ <h2>Cara bermain</h2><p class="sub">Satu kasus berlangsung 3 sampai 5 menit.</p>
+ <div class="panel"><ol class="safe how"><li>Baca situasi yang muncul di chat, komentar, atau story.</li><li>Pilih apa yang akan kamu lakukan.</li><li>Lihat dampaknya bagi korban dan penyebaran konten.</li><li>Coba pilihan lain untuk membandingkan hasilnya.</li></ol></div>
+ <div class="tier t-wn"><h3>Sebelum mulai</h3><p>Cerita di sini tentang perundungan. Semua nama, akun, dan kejadian adalah rekaan. Kamu boleh berhenti kapan saja lewat tombol Butuh bantuan. Kalau terasa berat, bicaralah dengan guru BK atau orang dewasa yang kamu percaya.</p></div>
+ <button class="btn" onclick="P.seen=1;save();go('cases')">Aku mengerti, mulai</button>
+</section>
+
+<section class="view" id="about">
+ <button class="link" onclick="go('home')">‹ Beranda</button>
+ <p class="sub" style="margin:0">SAKTI-D · DIGITAL AWARENESS SIMULATION</p>
+ <h2>Satu Layar. Satu Kejadian. Satu Pilihan.</h2>
+ <p>Ketika <i>cyberbullying</i> terjadi, kamu bukan hanya penonton. Kamu adalah bagian dari situasi yang bisa menentukan apa yang terjadi selanjutnya.</p>
+ <p>Jika kamu melihat seseorang dirundung di dunia digital, apa yang akan kamu lakukan? Diam, ikut menyebarkan, membela korban, menyimpan bukti, atau melaporkan? Setiap pilihan punya konsekuensi.</p>
+ <div class="big">Jangan Hanya Jadi Penonton Digital.</div>
+ <p><i>Cyberbullying</i> adalah perundungan lewat teknologi digital, seperti media sosial, aplikasi pesan, dan platform daring lainnya. Bentuknya bisa penghinaan, ancaman, atau penyebaran konten untuk menyakiti dan mempermalukan seseorang.</p>
+ <p>Dalam situasi itu ada <i>bystander</i>, yaitu orang yang menyaksikan tanpa selalu menjadi korban atau pelaku. Responsnya beragam: diam, ikut menyebarkan, mendukung korban, atau melaporkan.</p>
+ <div class="panel"><h3>Seberapa dekat masalah ini?</h3><p>Dalam survei UNICEF U-Report, 45% dari 2.777 anak muda Indonesia usia 14 sampai 24 tahun mengaku pernah mengalami <i>cyberbullying</i>.</p></div>
+ <p>SAKTI-D membantu pelajar berlatih mengambil keputusan sebagai saksi digital lewat simulasi interaktif: mengenali situasi, mempertimbangkan konsekuensi, dan memilih tindakan yang aman serta bertanggung jawab.</p>
+ <div class="panel"><h3>Tim peneliti</h3><p>Siti Fatimah Hasanah, Kirara Khaira Herman Susilo, Nalita Ikto Rosidah Putri</p></div>
+ <p class="sdesc">Semua nama, akun, dan kejadian di simulasi ini adalah rekaan.</p>
+ <button class="btn" onclick="go('cases')">Mulai latihan</button>
+</section>
+
+<section class="view" id="bk">
+ <button class="link" onclick="go('home')">‹ Beranda</button>
+ <h2>Lapor ke BK</h2>
+ <div class="tier t-wn"><h3>Contoh tampilan prototipe</h3><p>Laporan di halaman ini belum terkirim ke siapa pun. Kalau kamu butuh bantuan sekarang, temui guru BK atau orang dewasa yang kamu percaya.</p></div>
+ <div id="bkf"><p class="sub">Di versi resmi, laporanmu masuk ke Guru BK di sekolahmu dan tidak dibagikan ke teman.</p>
+ <label for="bks">Sekolah</label><select class="fld" id="bks"><option>Pilih sekolah (contoh)</option><option>SMP Contoh Jombang</option><option>SMA Contoh Jombang</option></select>
+ <label>Kamu sebagai</label><div class="chips" id="bkr"></div>
+ <label>Jenis kejadian</label><div class="chips" id="bkj"></div>
+ <label for="bkt">Ceritakan singkat</label><textarea class="fld" id="bkt" rows="4" placeholder="Apa yang terjadi? Kamu boleh tidak menyebut nama."></textarea>
+ <div class="ck"><input type="checkbox" id="bka" checked><label for="bka" style="margin:0;font-weight:500">Kirim sebagai anonim</label></div>
+ <button class="btn" onclick="bkSend()">Kirim contoh laporan</button></div>
+ <div id="bko" style="display:none"><div class="tier t-ok"><h3>Contoh laporan terkirim</h3><p>Kode contoh: <b id="bkc"></b>. Di versi resmi, Guru BK sekolahmu yang menerima dan menindaklanjutinya. Karena ini prototipe, tidak ada data yang dikirim atau disimpan.</p></div><button class="btn ghost" onclick="go('home')">Kembali ke beranda</button></div>
+</section>
+
+<section class="view" id="bkd">
+ <button class="link" onclick="go('home')">‹ Beranda</button>
+ <h2>Dasbor Guru BK</h2>
+ <div class="tier t-wn"><h3>Contoh tampilan prototipe</h3><p>Semua data di halaman ini rekaan. Versi resmi hanya bisa dibuka Guru BK sekolah dengan akun khusus.</p></div>
+ <div class="sg" id="bdS"></div><div class="chips" id="bdF"></div><div id="bdL" style="margin-top:12px"></div>
+ <div class="panel"><h3>Rekap respons saksi di simulasi</h3><p style="margin-bottom:10px">Rekap kelas tanpa identitas peserta (data contoh).</p><div id="bdB"></div></div>
+</section>
+
+<section class="view" id="end"></section>
+</main>
+
+<div class="intro" id="intro"></div>
+<div class="sheet" id="sheet" onclick="if(event.target===this)sheet(false)"><div>
+ <h3>Butuh jeda atau bantuan?</h3>
+ <p>Topik ini bisa terasa berat. Kamu boleh berhenti kapan saja. Kalau kamu atau temanmu sedang mengalami perundungan, ceritakan ke guru BK atau orang dewasa yang kamu percaya.</p>
+ <button class="btn" onclick="sheet(false)">Lanjut berlatih</button>
+ <button class="btn ghost" onclick="sheet(false);go('bk')">Lapor ke BK</button><button class="btn ghost" onclick="sheet(false);go('home')">Keluar dari simulasi</button>
+</div></div>
+
+<script>
+const SK={kenali:['🔍','Mengenali situasi','Membedakan perundungan dari candaan dan tidak ikut menuduh.'],nilai:['⚖️','Menimbang dampak','Memikirkan akibat tindakan bagi korban dan orang lain.'],lindungi:['🔒','Melindungi privasi','Tidak menyebarkan konten dan menjaga identitas korban.'],tindak:['🤝','Memilih tindakan aman','Membantu korban tanpa membahayakan diri sendiri.']};
+// pilihan: [teks, tingkat(o/w/r), [rasa aman, penyebaran], umpan balik, sisi korban, chat lanjutan, kartu]
+const C=[
+{id:'foto',n:'Foto di Grup Kelas',g:'Grup Kelas 10A',v:'Rafi',d:'Sebuah foto teman sekelas mulai dijadikan bahan ejekan dan disebarkan.',m:'Rani|Liat deh foto ini 😂~Dika|Wkwk kok bisa sih~Salsa|Kasihan banget tapi lucu juga…',r:[
+ [0,'Foto Rafi mulai ramai dibagikan. Apa yang kamu lakukan?',[
+  ['Kirim emoji tertawa supaya tidak dianggap aneh','r',[-12,18],'Reaksi tawa terlihat seperti dukungan untuk pengirim foto dan mendorong yang lain ikut-ikutan.','Rafi melihat banyak tawa dan merasa semua orang menertawakannya.','Dika|Nah kan lucu 😂~Rani|Share ke grup lain ah',''],
+  ['Teruskan foto itu ke grup lain','r',[-18,30],'Foto yang sudah keluar dari grup sulit ditarik kembali dan identitas Rafi makin mudah dikenali.','Rafi tahu fotonya beredar ke orang yang tidak ia kenal dan merasa tidak berdaya.','Rani|Udah nyebar ke grup angkatan juga',''],
+  ['Diam saja dan keluar dari grup','w',[-3,3],'Kamu tidak memperburuk keadaan, tetapi Rafi belum mendapat dukungan dan fotonya masih beredar.','Rafi melihat tidak ada yang membelanya dan menyimpulkan semua orang setuju.','Dika|Salsa keluar? Baperan banget',''],
+  ['Tidak menyebarkan, lalu kirim pesan pribadi ke Rafi','o',[16,-6],'Kamu tidak menambah penyebaran dan memberi dukungan langsung tanpa berhadapan dengan pelaku.','Rafi menerima pesanmu dan merasa ada yang berpihak padanya.','Rafi|Makasih ya. Aku kira semuanya setuju','lindungi']]],
+ ['Rani|Fotonya udah ada di grup angkatan juga lho','Foto terus menyebar. Langkah berikutnya?',[
+  ['Lapor ke guru BK tanpa meneruskan fotonya','o',[22,-24],'Orang dewasa bisa membantu menghapus unggahan dan menghentikan penyebaran dengan lebih tepat.','Rafi lega karena ada orang dewasa yang membantu.','Rafi|Katanya fotonya mulai dihapus','tindak'],
+  ['Ajak teman yang peduli melapor bersama dan minta unggahan dihapus','o',[24,-28],'Bertindak bersama terasa lebih aman dan menunjukkan bahwa tidak semua orang setuju.','Rafi merasa tidak sendirian karena ada beberapa teman yang berpihak.','Salsa|Aku ikut lapor deh. Maaf tadi ikut komentar','nilai'],
+  ['Marah-marah di grup agar semua berhenti','w',[3,-4],'Niatmu baik, tetapi serangan terbuka bisa memancing balasan dan membuat Rafi makin disorot.','Rafi merasa makin jadi pusat perhatian.','Dika|Sok bener banget nih~Rani|Makin rame aja',''],
+  ['Biarkan saja, nanti juga reda sendiri','r',[-8,12],'Konten yang dibiarkan biasanya terus menyebar dan korban menanggung sendiri akibatnya.','Rafi merasa ditinggalkan saat foto itu terus menyebar.','Rani|Makin banyak yang ngeshare nih','']]]]},
+{id:'anon',n:'Akun Tanpa Nama',g:'Komentar Akun Sekolah',v:'Nadia',d:'Komentar merendahkan muncul dari akun anonim di media sosial sekolah.',m:'Akun_anon|Siapa sih yang selalu sok pintar di kelas 9B? 🙄~Dika|Wkwk pasti Nadia~Salsa|Iya kayaknya dia deh',r:[
+ [0,'Teman-teman mulai menebak. Kamu?',[
+  ['Ikut menebak biar seru','r',[-14,16],'Tebakan tanpa bukti bisa menyakiti orang yang tidak bersalah dan membuat akun itu makin berani.','Nadia dituduh tanpa tahu apa salahnya.','Akun_anon|Wah kena tuh~Dika|Fix Nadia',''],
+  ['Tidak ikut menebak, simpan tangkapan layar tanpa membagikannya','o',[10,-6],'Bukti disimpan untuk dilaporkan nanti dan kamu tidak ikut menuduh siapa pun.','Nadia tidak terseret tuduhan tambahan darimu.','Salsa|Kok jadi serius sih','kenali'],
+  ['Balas akun itu dengan hinaan juga','r',[-10,20],'Membalas dengan hinaan membuat konflik makin ramai dan mudah menarik orang lain ikut menyerang.','Nadia melihat komentar makin kasar di sekitar namanya.','Akun_anon|Hahaha makin ramai','']]],
+ ['Nadia|Aku capek. Kenapa semua orang nuduh aku?','Nadia terlihat terpukul. Langkahmu?',[
+  ['Hubungi Nadia secara pribadi: tanya kabarnya dan dengarkan','o',[22,-4],'Didengarkan membuat korban merasa ada yang peduli. Kamu juga bisa menawarkan untuk menemaninya melapor.','Nadia merasa ada satu orang yang percaya padanya.','Nadia|Makasih sudah nanya. Aku butuh teman cerita','nilai'],
+  ['Laporkan akun dan beri tahu guru BK beserta bukti','o',[16,-26],'Laporan dengan bukti membantu pihak berwenang menindaklanjuti akun anonim.','Nadia lega karena akun itu mulai ditindak.','Guru BK|Terima kasih laporannya. Kami tindak lanjuti','lindungi'],
+  ['Pura-pura tidak lihat, bukan urusanku','w',[-8,5],'Tidak ikut menyerang itu baik, tetapi Nadia masih menghadapi semuanya sendirian.','Nadia merasa tidak ada yang mau membantunya.','Nadia|Kayaknya tidak ada yang percaya aku','']]]]},
+{id:'diam',n:'Grup yang Diam',g:'Grup Nongkrong Kelas 11',v:'Bima',d:'Banyak yang membaca pesan menyakitkan, tetapi tidak ada yang bereaksi.',m:'Raka|Eh si Bima kemarin nangis di toilet loh 🤣~Dika|HAHA serius?~Salsa|(Banyak yang membaca tapi tidak ada yang membalas)',r:[
+ [0,'Banyak yang membaca tapi diam. Kamu?',[
+  ['Ikut diam, nanti juga ada yang menegur','w',[-5,6],'Diam sering dianggap setuju oleh pengirim, sehingga pesan seperti ini terus berlanjut.','Bima melihat tidak ada yang membelanya.','Raka|Pada diam, berarti setuju kan 😂',''],
+  ['Tulis singkat: cukup, ini bukan bahan bercanda','o',[14,-10],'Menegur singkat bisa menghentikan suasana kalau kamu merasa aman melakukannya. Kalau tidak, cara pribadi tetap sah.','Bima merasa ada yang membelanya di depan umum.','Dika|Iya iya maaf~Raka|Santai bro','tindak'],
+  ['Kirim pesan pribadi ke Bima dan tanya kabarnya','o',[16,-3],'Dukungan pribadi aman dilakukan dan tidak membuat Bima makin disorot.','Bima terkejut ada yang peduli.','Bima|Makasih udah nanya','nilai']]],
+ ['Bima|Jangan bilang siapa-siapa ya','Bima meminta kamu merahasiakan ini. Apa yang kamu lakukan?',[
+  ['Janji merahasiakan dan tidak melakukan apa-apa','w',[3,0],'Menghargai Bima itu penting, tetapi ia mungkin butuh bantuan orang dewasa yang tidak bisa kamu berikan sendiri.','Bima merasa didengar, tapi masih menanggung semuanya sendiri.','Bima|Makasih ya',''],
+  ['Temani Bima bicara dengan guru BK atas persetujuannya','o',[26,-14],'Bima ikut menentukan langkahnya, sambil memastikan ada orang dewasa yang membantu.','Bima merasa dihargai sekaligus terbantu.','Bima|Oke. Aku mau coba bicara, tapi temani aku ya','lindungi'],
+  ['Ceritakan ke grup supaya semua tahu dan berhenti','r',[-20,24],'Membuka cerita Bima tanpa izin membuatnya makin malu dan melanggar kepercayaannya.','Bima merasa dikhianati.','Raka|HAHA ternyata bener','']]]]},
+{id:'abu',n:'Candaan yang Kelewatan',g:'Grup WA Geng Kantin',pf:'wa',v:'Dimas',d:'Teman dekat saling ejek, tapi salah satunya mulai terdiam. Ini bercanda atau sudah menyakitkan?',m:'Fikri|Dimas kemarin jatuh pas basket, kayak karung beras wkwk~Aldo|Haha lebih parah pas dia hampir nangis~Dimas|Haha iya rek…',r:[
+ [0,'Biasanya mereka memang saling ejek. Tapi balasan Dimas terasa beda. Apa yang kamu lakukan?',[
+  ['Ikut bercanda, toh mereka teman dekat','w',[-6,6],'Di antara teman dekat, candaan bisa terasa wajar. Tapi balasan Dimas yang pendek bisa jadi tanda ia tidak nyaman.','Dimas tertawa karena tidak mau dianggap baperan, padahal hatinya tidak enak.','Aldo|Wkwk yang hampir nangis itu sih~Fikri|Mantap',''],
+  ['Cek lewat pesan pribadi: Dim, kamu oke?','o',[14,-4],'Kamu tidak menuduh siapa pun, hanya memastikan. Ini cara aman menilai konteks sebelum bertindak.','Dimas lega ada yang bertanya dengan tulus.','Dimas|Jujur agak kepikiran sih, tapi biasa aja kok','kenali'],
+  ['Tegur keras di grup: kalian keterlaluan','w',[2,-2],'Niatmu baik, tetapi menegur terbuka sebelum tahu perasaan Dimas bisa membuatnya malu.','Dimas merasa dirinya jadi pusat masalah.','Fikri|Santai napa, cuma bercanda~Aldo|Dimas aja gak masalah','']]],
+ ['Dimas|Gak usah dibahas ya. Aku emang capek aja','Dimas bilang tidak perlu dibahas, tapi pesannya terdengar lelah. Langkahmu?',[
+  ['Hargai permintaannya, tapi bilang: aku di sini kalau kamu mau cerita','o',[18,-5],'Kamu menghargai batasnya sambil membuka pintu. Orang sering butuh waktu sebelum bercerita.','Dimas merasa tidak dipaksa, tapi tahu ada yang peduli.','Dimas|Makasih ya. Nanti kalau siap aku cerita','nilai'],
+  ['Anggap selesai dan ngobrol seperti biasa','w',[0,0],'Tidak ada yang memburuk, tetapi tanda Dimas tidak nyaman belum ditanggapi.','Dimas merasa tidak ada yang benar-benar memperhatikan.','Dimas|Oke',''],
+  ['Bicara empat mata dengan Fikri soal candaan tadi, tanpa menyebut cerita Dimas','o',[16,-12],'Kamu mengajak teman introspeksi tanpa membuka perasaan Dimas dan tanpa mempermalukan siapa pun.','Dimas merasa candaan di grup mulai berkurang tanpa harus mengaku.','Fikri|Oh… aku gak sadar. Nanti aku minta maaf','tindak']]]]},
+{id:'tiktok',n:'Komentar di TikTok',g:'Komentar TikTok',pf:'tt',v:'Sinta',d:'Video joget teman sekolahmu ramai ditonton, tetapi kolom komentarnya penuh ejekan.',m:'Komentar|Kok jogetnya kaku banget sih 🤣~Akun_xyz|Dia kan yang kelas 8C itu? Sering jadi bahan tuh~Dewi|Wkwk bikin stitch ah',r:[
+ [0,'Video Sinta ramai dikomentari. Apa yang kamu lakukan?',[
+  ['Ikut komentar atau bikin stitch biar ikut ramai','r',[-14,20],'Stitch dan komentar membawa video itu ke lebih banyak orang, sehingga makin banyak yang melihat ejekannya.','Sinta melihat videonya jadi bahan lucu-lucuan orang yang tidak ia kenal.','Dewi|Cuss stitch jadi~Komentar|Viral nih 🤣',''],
+  ['Laporkan komentar yang menghina lewat fitur Laporkan','o',[12,-14],'Fitur lapor aman dilakukan tanpa tampil di depan siapa pun dan membantu platform menindak komentar.','Sinta merasa komentar terburuk mulai hilang.','Sistem|Terima kasih. Laporanmu sedang ditinjau','lindungi'],
+  ['Skip saja, scroll ke video lain','w',[-2,2],'Kamu tidak ikut memperburuk, tetapi komentarnya tetap menumpuk.','Sinta membaca semua komentar itu sendirian.','Akun_xyz|Makin banyak yang nonton wkwk','']]],
+ ['Sinta|Aku kok jadi malu ke sekolah…','Sinta tampaknya sudah melihat komentar-komentar itu. Langkahmu?',[
+  ['Kirim DM: videonya bagus kok, jangan dengerin komentar itu. Mau cerita?','o',[20,-3],'Pesan pribadi yang tulus membantu korban merasa tidak sendirian tanpa menambah sorotan.','Sinta merasa ada satu orang yang berpihak padanya.','Sinta|Makasih ya. Aku kira semua orang ngetawain aku','nilai'],
+  ['Balas komentar jahat satu per satu dengan marah','w',[0,8],'Membalas menaikkan interaksi video itu sehingga makin banyak orang melihatnya.','Sinta melihat perdebatan makin panjang di bawah videonya.','Akun_xyz|Wih ada yang baper~Komentar|Makin rame aja',''],
+  ['Ajak teman sekelas melapor bersama dan cerita ke wali kelas','o',[22,-16],'Bertindak bersama terasa lebih aman dan melibatkan orang dewasa yang bisa menindaklanjuti.','Sinta lega karena beberapa orang mulai peduli.','Wali kelas|Terima kasih sudah cerita. Kami bantu','tindak']]]]},
+{id:'takut',n:'Takut Jadi Sasaran',g:'Story Close Friends',pf:'ig',v:'Lintang',d:'Sebuah story mengejek teman sekelas. Kamu takut kalau membelanya, kamu yang jadi sasaran berikutnya.',m:'Gita|Lintang pake baju itu lagi 😬 #ootd~Nabila|Hahaha jangan bilang siapa-siapa ya~Sistem|Kamu termasuk 20 orang yang bisa melihat story ini',r:[
+ [0,'Kamu takut kalau membela, kamu yang jadi sasaran berikutnya. Apa yang kamu lakukan?',[
+  ['Ikut membagikan ulang supaya aman dari mereka','r',[-16,22],'Rasa takut itu nyata, tetapi ikut menyebarkan membuat Lintang makin terpojok dan tidak membuatmu benar-benar aman.','Lintang melihat orang yang ia kira netral ikut menyebarkan.','Gita|Nah gitu dong ikut seru~Nabila|Fix satu geng',''],
+  ['Diam dulu karena takut, tanpa melakukan apa-apa','w',[-3,3],'Takut itu wajar dan bukan kesalahanmu. Tapi diam saja belum membantu Lintang, padahal ada cara aman yang tidak membuatmu tampil di depan.','Lintang merasa tidak ada yang berpihak.','Gita|Banyak yang liat tapi diem aja hehe',''],
+  ['Kirim pesan pribadi ke Lintang dan simpan tangkapan layar tanpa membagikannya','o',[14,-4],'Cara ini tidak membuatmu tampil di depan, tetapi Lintang tahu ada yang peduli dan kamu punya bukti jika perlu melapor.','Lintang membaca pesanmu dan merasa tidak sendirian.','Lintang|Makasih… aku kira semua orang benci aku','lindungi']]],
+ ['Nabila|Eh, kamu kok gak ikut komen? Jangan-jangan kamu belain dia?','Nabila mulai curiga padamu. Langkah berikutnya?',[
+  ['Jawab santai tanpa memihak, lalu lapor diam-diam ke guru BK','o',[20,-18],'Kamu menjaga dirimu aman, tidak berdebat, dan tetap membantu lewat jalur yang tidak terlihat.','Lintang terbantu karena ada orang dewasa yang mulai memperhatikan.','Nabila|Oh ok. Yaudah deh','tindak'],
+  ['Ceritakan ketakutanmu ke teman tepercaya, lalu cari bantuan bersama','o',[22,-12],'Bertindak bersama membuat risiko lebih kecil dan kamu tidak menanggung ketakutan sendirian.','Lintang mendapat dukungan dari lebih dari satu orang.','Teman|Aku juga takut dari kemarin. Yuk lapor bareng','nilai'],
+  ['Minta maaf ke Nabila dan ikut mengejek Lintang','r',[-20,20],'Ikut mengejek mungkin meredakan tekanan sesaat, tetapi membuat Lintang makin sendirian dan tidak menyelesaikan rasa takutmu.','Lintang merasa dikhianati.','Nabila|Nah gitu dong~Gita|Welcome to the geng','']]]]},
+{id:'masalah',n:'Dia Emang Nyebelin',g:'Grup Angkatan',pf:'wa',v:'Bagas',d:'Teman yang sering menyebalkan mulai dipermalukan. Apakah itu membuat perundungan jadi wajar?',m:'Raka|Si Bagas tuh emang nyebelin, pamer terus~Dika|Nih voice note dia lagi sombong, sebar aja ya~Salsa|Hahaha biar dia tau rasa',r:[
+ [0,'Bagas memang sering menyebalkan, dan voice note-nya mulai disebar. Apa yang kamu lakukan?',[
+  ['Ikut menyebar, dia memang pantas dapat balasan','r',[-14,20],'Perilaku menyebalkan tidak membenarkan mempermalukan seseorang. Menyebar voice note membuat masalahnya bergeser menjadi perundungan.','Bagas merasa semua orang memusuhinya dan makin menutup diri.','Raka|Nah gitu dong~Dika|Sebar ke grup angkatan',''],
+  ['Bela total: Bagas tidak salah apa-apa','w',[2,-2],'Membela itu baik, tetapi menyangkal masalahnya membuat teman lain makin kesal. Perilakunya tetap bisa dibicarakan dengan cara yang sehat.','Bagas merasa dibela, tapi masalah dengan teman-temannya belum selesai.','Salsa|Lah kok malah belain dia~Raka|Ribet',''],
+  ['Tidak ikut menyebar, usulkan: kalau ada masalah, bicarakan langsung atau lewat guru','o',[16,-10],'Kamu memisahkan perilaku yang bisa ditegur dari cara menegurnya. Tidak ada yang perlu dipermalukan untuk bisa belajar.','Bagas tidak jadi bahan tontonan dan masih punya kesempatan memperbaiki diri.','Dika|Ya udah deh, hapus aja voice note-nya~Raka|Hmm iya sih','kenali']]],
+ ['Raka|Tapi dia emang sering nyontek dan ngadu ke guru lho!','Temanmu masih merasa Bagas pantas dipermalukan. Apa yang kamu katakan?',[
+  ['Akui kesalahannya, tapi tegur perilakunya, bukan permalukan orangnya','o',[20,-12],'Mengakui masalah tanpa merendahkan orangnya adalah cara bertanggung jawab. Kamu juga bisa mengajak teman bicara langsung ke Bagas.','Bagas punya peluang mendengar masukan tanpa merasa diserang.','Salsa|Boleh sih, tapi caranya bukan gini ya','nilai'],
+  ['Diam saja, takut dibilang membela dia','w',[-4,4],'Takut dianggap membela itu wajar, tetapi diam membuat orang mengira semua setuju.','Bagas melihat tidak ada satu pun yang mau bersikap adil.','Raka|Nah kan nggak ada yang protes',''],
+  ['Ikut bilang: ya sudah, biar dia jera','r',[-16,16],'Niat membuat jera sering berubah menjadi hukuman publik yang tidak proporsional dan melukai.','Bagas merasa dihukum oleh banyak orang sekaligus.','Dika|Mantap, biar kapok~Raka|Nih gue sebar lagi','']]]]},
+{id:'saling',n:'Saling Serang di Komentar',g:'Komentar Instagram',pf:'ig',v:'Tari dan Vina',d:'Dua teman saling mempermalukan di komentar, dan orang-orang mulai memihak.',m:'Tari|Biar semua tau Vina itu munafik~Vina|Kamu duluan yang mulai. Nih aku spill chat kamu~Dewi|Tim Tari lawan Tim Vina nih, seru juga',r:[
+ [0,'Tari dan Vina saling menyerang, dan teman-temanmu mulai memihak. Apa yang kamu lakukan?',[
+  ['Pilih salah satu pihak dan ikut menyerang yang lain','r',[-14,20],'Memihak dan ikut menyerang membuat dua orang yang sama-sama terluka makin dikeroyok, dan konfliknya makin ramai.','Tari dan Vina sama-sama merasa dikeroyok banyak orang.','Dewi|Tim Tari menang!~Raka|Kok Vina dibela sih',''],
+  ['Tonton saja, ini urusan mereka berdua','w',[-5,6],'Menjaga jarak itu wajar, tetapi konten yang saling mempermalukan terus beredar dan keduanya makin terluka.','Tari dan Vina merasa tidak ada yang peduli.','Dewi|Wah makin panas~Tari|Awas ya kamu',''],
+  ['Tidak memihak: kirim pesan pribadi ke masing-masing, tanya kabar, ajak berhenti dulu','o',[14,-10],'Kamu tidak mencari siapa yang paling salah. Keduanya sedang terluka dan butuh didengar tanpa dihakimi.','Tari dan Vina merasa ada yang peduli tanpa dihakimi.','Tari|Aku juga capek sebenarnya~Vina|Iya, males banget kayak gini','nilai']]],
+ ['Tari|Aku udah mau nyebar chat Vina ke satu angkatan','Salah satunya hampir menyebar bukti serangan, dan yang lain siap membalas. Langkahmu?',[
+  ['Minta mereka berhenti menyebar, lalu ajak keduanya bicara dengan guru BK sebagai penengah','o',[22,-22],'BK bisa menjadi penengah yang adil. Kamu mengajak keduanya, bukan mengadili salah satu.','Tari dan Vina punya ruang aman untuk menjelaskan tanpa saling serang.','Tari|Oke, asal Vina juga berhenti~Vina|Iya aku mau','tindak'],
+  ['Bantu Tari menyebar chat Vina supaya adil','r',[-18,22],'Balas menyebarkan membuat lingkaran serang-balas makin besar dan orang lain ikut terseret.','Vina merasa dipermalukan satu angkatan dan akan membalas lagi.','Vina|Oke aku juga spill semuanya',''],
+  ['Lapor ke BK, tetapi hanya menyebut Vina yang salah','w',[4,-6],'Melapor itu baik, tetapi menyalahkan satu pihak membuat akar masalahnya tidak terselesaikan.','Tari merasa menang, Vina merasa dituduh sendirian.','Vina|Kok aku doang yang disalahin?','']]]]},
+{id:'seksual',n:'Foto Pribadi Bocor',g:'Grup Angkatan',pf:'wa',v:'Alya',cw:'Kasus ini tentang penyebaran foto pribadi tanpa izin (kekerasan seksual berbasis online). Tidak ada gambar atau isi foto yang ditampilkan. Kamu boleh melewati kasus ini kapan saja. Kalau topik ini terasa berat, bicaralah dengan guru BK atau orang dewasa yang kamu percaya.',d:'Foto pribadi seorang teman tersebar tanpa izinnya, dan ada yang menanggapinya dengan candaan melecehkan.',m:'Dion|Eh ini foto pribadinya Alya kan? 😏~Raka|Wah beneran nyebar, udah masuk grup sebelah~Dewi|Kasihan sih, tapi kok dia mau ngirim sih',r:[
+ [0,'Foto pribadi Alya tersebar di grup tanpa izinnya. Apa yang kamu lakukan?',[
+  ['Ikut membahas atau meminta dikirimi fotonya','r',[-20,25],'Menyebarkan atau meminta foto pribadi seseorang tanpa izin melanggar privasi dan bisa melanggar hukum, apalagi jika korbannya masih di bawah umur.','Alya merasa dipermalukan dan tidak punya tempat bersembunyi.','Dion|Kirim dong, penasaran~Raka|Cek grup sebelah deh',''],
+  ['Menyalahkan Alya: kenapa dia mau mengirim foto itu?','r',[-16,10],'Menyalahkan korban membuatnya makin malu dan takut melapor. Yang salah adalah orang yang menyebarkannya tanpa izin.','Alya merasa semua orang menyalahkannya dan takut bercerita.','Dewi|Iya kan, salah sendiri',''],
+  ['Diam saja, takut ikut terseret','w',[-4,4],'Takut itu wajar, tetapi diam membuat foto terus beredar dan Alya sendirian. Ada cara aman membantu tanpa tampil di depan.','Alya merasa tidak ada yang membelanya.','Raka|Makin banyak yang liat nih',''],
+  ['Tidak menyebarkan, tidak menyimpan fotonya, dan kirim pesan pribadi ke Alya: ini bukan salahmu','o',[16,-8],'Kamu tidak menambah penyebaran, tidak menyimpan fotonya, dan menunjukkan bahwa Alya bukan pihak yang bersalah.','Alya membaca pesanmu dan merasa tidak sendirian.','Alya|Makasih… aku takut banget','lindungi']]],
+ ['Alya|Aku takut banget. Fotonya udah ke mana-mana','Alya sangat ketakutan. Apa langkahmu?',[
+  ['Temani Alya bicara dengan guru BK atau orang dewasa tepercaya, dan bantu melapor ke platform tanpa meneruskan fotonya','o',[26,-26],'Konten seperti ini perlu dilaporkan ke orang dewasa dan platform agar bisa dihapus. Kamu mendampingi tanpa menyebarkannya lagi.','Alya merasa ada yang mendampingi dan fotonya mulai dilaporkan untuk dihapus.','Alya|Aku mau coba cerita ke BK. Temenin ya','tindak'],
+  ['Screenshot fotonya sebagai bukti, lalu simpan di galeri','w',[-6,8],'Niatnya baik, tetapi menyimpan foto pribadi anak di bawah umur justru berisiko. Cukup catat akun, tautan, dan waktu kejadian untuk dilaporkan.','Alya makin cemas karena salinan fotonya bertambah.','Alya|Kok disimpen juga…',''],
+  ['Bilang ke Alya: diamkan saja, nanti juga reda','r',[-10,10],'Membiarkan membuat foto terus tersebar dan Alya menghadapi semuanya sendirian. Ada layanan dan orang dewasa yang bisa membantu menghapusnya.','Alya merasa tidak ada jalan keluar.','Alya|Jadi aku harus gimana…','']]]]}];
+const OT={o:'Teman lain melihat ada yang berani bersikap baik, jadi lebih mudah ikut mendukung.',w:'Teman lain tidak melihat sikapmu, jadi suasana grup tidak banyak berubah.',r:'Teman lain melihat tindakanmu sebagai contoh dan banyak yang ikut-ikutan.'},
+ YU={o:'Kamu mungkin cemas, tetapi bertindak aman biasanya membuatmu lebih tenang setelahnya.',w:'Kamu mungkin lega sesaat, tetapi bisa terus memikirkan apa yang terjadi.',r:'Kamu mungkin merasa diterima kelompok, tetapi bisa menyesal belakangan.'},
+ TH={o:'Langkah yang paling membantu',w:'Cukup aman, tapi bisa lebih membantu',r:'Berisiko memperburuk keadaan'},TC={o:'t-ok',w:'t-wn',r:'t-rk'};
+const $=i=>document.getElementById(i),fast=matchMedia('(prefers-reduced-motion:reduce)').matches,wait=ms=>new Promise(r=>setTimeout(r,fast?0:ms));
+let P={};try{P=JSON.parse(localStorage.getItem('saktid')||'{}')}catch(e){}P.done=P.done||[];P.sk=P.sk||[];P.mode=P.mode||'smp';
+const save=()=>{try{localStorage.setItem('saktid',JSON.stringify(P))}catch(e){}};
+let S=null;
+function av(w){let h=0;for(const c of w)h=(h*31+c.charCodeAt(0))%360;const hair=['#2B2F4A','#5A3A22','#1C1C1C','#8A5A2B'][h%4],skin=['#F2C9A0','#E8B48A','#D49A72'][h%3];return`<svg class="av" viewBox="0 0 40 40"><circle cx="20" cy="20" r="20" style="fill:hsl(${h} 55% 78%)"/><path d="M7 40a13 12 0 0 1 26 0z" style="fill:hsl(${h} 50% 42%)"/><circle cx="20" cy="17" r="7" fill="${skin}"/><path d="M13 16a7 7 0 0 1 14 0c-3-3-10-3-14 0z" fill="${hair}"/></svg>`}
+const ART={seksual:'<svg viewBox="0 0 64 64" width="64" height="64"><path class="fa" d="M32 4l22 8v16c0 16-9 26-22 32C19 54 10 44 10 28V12z"/><rect x="23" y="29" width="18" height="14" rx="3" fill="#fff"/><path d="M26 29v-4a6 6 0 0 1 12 0v4" fill="none" stroke="#fff" stroke-width="3"/></svg>',saling:'<svg viewBox="0 0 64 64" width="64" height="64"><rect class="fr" x="4" y="10" width="34" height="22" rx="10"/><rect class="fa" x="26" y="34" width="34" height="22" rx="10"/><text x="32" y="38" text-anchor="middle" font-size="22">⚡</text></svg>',masalah:'<svg viewBox="0 0 64 64" width="64" height="64"><rect class="fs" x="6" y="8" width="52" height="34" rx="12"/><text x="32" y="33" text-anchor="middle" font-size="22">🎙️</text><rect class="fw" x="30" y="40" width="30" height="18" rx="9"/><text x="45" y="53" text-anchor="middle" font-size="12">⚖️</text></svg>',abu:'<svg viewBox="0 0 64 64" width="64" height="64"><rect class="fs" x="4" y="8" width="40" height="30" rx="12"/><text x="24" y="31" text-anchor="middle" font-size="22">😄</text><rect class="fw" x="30" y="36" width="30" height="20" rx="9"/><text x="45" y="51" text-anchor="middle" font-size="14">😐</text></svg>',tiktok:'<svg viewBox="0 0 64 64" width="64" height="64"><rect class="fh" x="10" y="4" width="44" height="56" rx="9"/><circle class="fa" cx="27" cy="43" r="7"/><rect class="fa" x="32" y="15" width="4" height="28"/><path class="fw" d="M36 15c4 6 8 6 12 6v5c-5 0-9-1-12-4z"/></svg>',takut:'<svg viewBox="0 0 64 64" width="64" height="64"><circle cx="32" cy="32" r="26" fill="none" stroke="#dc2743" stroke-width="4"/><circle class="fs" cx="32" cy="32" r="20"/><text x="32" y="40" text-anchor="middle" font-size="24">😨</text></svg>',foto:'<svg viewBox="0 0 64 64" width="64" height="64"><rect class="fs" x="4" y="8" width="44" height="36" rx="6"/><circle class="fw" cx="18" cy="22" r="5"/><path class="fa" d="M8 40l14-12 10 8 8-6 8 10z"/><rect class="fr" x="34" y="38" width="26" height="18" rx="8"/><text x="40" y="52" font-size="12">😂</text></svg>',anon:'<svg viewBox="0 0 64 64" width="64" height="64"><rect class="fs" x="6" y="8" width="52" height="36" rx="12"/><path class="fs" d="M18 44l-4 14 16-14z"/><text x="32" y="36" text-anchor="middle" font-size="26" font-weight="700" class="ta">?</text></svg>',diam:'<svg viewBox="0 0 64 64" width="64" height="64"><circle class="fa" cx="14" cy="24" r="9"/><circle class="fw" cx="32" cy="24" r="9"/><circle class="fb2" cx="50" cy="24" r="9"/><rect class="fs" x="12" y="40" width="40" height="16" rx="8"/><circle class="fa" cx="24" cy="48" r="2.5"/><circle class="fa" cx="32" cy="48" r="2.5"/><circle class="fa" cx="40" cy="48" r="2.5"/></svg>'};
+function P2(x,y,k,o){const{sk='#F2C9A0',hr='#2B2F4A',tp='#7C5CFF',hj=0,hp=0,cp='',m='s'}=o||{};
+ return `<g transform="translate(${x} ${y}) scale(${k})"><path d="M-30 66a30 34 0 0 1 60 0z" fill="${tp}"/>${hj?`<path d="M-23 6a23 26 0 0 1 46 0v26a23 24 0 0 1-46 0z" fill="${hr}"/>`:''}<circle r="18" fill="${sk}"/>${hj?`<path d="M-22 -2a22 22 0 0 1 44 0c-9-7-35-7-44 0z" fill="${hr}"/>`:`<path d="M-19 -3a19 19 0 0 1 38 0c-6-8-32-8-38 0z" fill="${hr}"/>`}${cp?`<path d="M-19 -8a19 12 0 0 1 38 0z" fill="${cp}"/><rect x="2" y="-9" width="26" height="5" rx="2.5" fill="${cp}"/>`:''}<circle cx="-6" cy="3" r="2" fill="#2B2F4A"/><circle cx="6" cy="3" r="2" fill="#2B2F4A"/>${m==='o'?'<ellipse cy="11" rx="3.5" ry="4" fill="#2B2F4A"/>':`<path d="${m==='s'?'M-5 9q5 5 10 0':m==='n'?'M-5 14q5-6 10 0':'M-5 12q5-3 10 0'}" fill="none" stroke="#2B2F4A" stroke-width="1.8" stroke-linecap="round"/>`}${hp?`<path d="M-22 -2a22 22 0 0 1 44 0" fill="none" stroke="#1C1C1C" stroke-width="4"/><rect x="-26" y="-4" width="8" height="14" rx="3" fill="#1C1C1C"/><rect x="18" y="-4" width="8" height="14" rx="3" fill="#1C1C1C"/>`:''}</g>`}
+const HERO=()=>`<svg viewBox="0 0 320 200" role="img" aria-label="Ilustrasi dua pelajar dengan ponsel berisi grup chat"><ellipse class="fs" cx="160" cy="108" rx="152" ry="88"/><rect class="fh" x="112" y="16" width="96" height="168" rx="16"/><rect class="fc" x="118" y="26" width="84" height="148" rx="10"/><g class="bb"><rect class="fb2" x="124" y="40" width="58" height="20" rx="8"/><circle class="fa" cx="133" cy="50" r="4"/></g><g class="bb b2"><rect class="fb2" x="132" y="68" width="64" height="20" rx="8"/><circle class="fw" cx="188" cy="78" r="4"/></g><g class="bb b3"><rect class="fb2" x="124" y="96" width="54" height="20" rx="8"/><circle class="fr" cx="133" cy="106" r="4"/></g><g class="pz"><circle class="fa" cx="160" cy="146" r="15"/><rect x="154" y="139" width="4" height="14" rx="1.5" fill="#fff"/><rect x="162" y="139" width="4" height="14" rx="1.5" fill="#fff"/></g>${P2(52,116,1.05,{hj:1,hr:'#3B2A63',tp:'#7C5CFF',hp:1})}${P2(268,116,1.05,{hr:'#1C1C1C',tp:'#E8A33D',cp:'#12203A',sk:'#D49A72'})}<text class="fl" x="76" y="62" font-size="24">😂</text><text class="fl2" x="232" y="60" font-size="24">⏸️</text><text class="fl" x="30" y="150" font-size="18">💬</text></svg>`;
+const trio=q=>`<svg viewBox="0 0 320 170">${[[62,'#7C5CFF','#2B2F4A',0],[160,'#3FA06B','#5A3A22',1],[258,'#E8A33D','#1C1C1C',0]].map(([x,t,h,j])=>P2(x,78,.8,{tp:t,hr:h,hj:j,m:'f'})+`<rect x="${x-9}" y="118" width="18" height="26" rx="4" fill="#12203A"/><rect x="${x-7}" y="120" width="14" height="20" rx="2" fill="#9FD8FF"/>`).join('')}<g class="bb"><circle cx="160" cy="22" r="16" fill="#fff"/><text x="160" y="31" text-anchor="middle" font-size="22" font-weight="800" fill="#0E8C8A">${q}</text></g></svg>`;
+const SC={
+tiktok:()=>`<svg viewBox="0 0 320 190"><defs><linearGradient id="tg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b1f6e"/><stop offset="1" stop-color="#14102B"/></linearGradient></defs><rect x="100" y="4" width="120" height="182" rx="16" fill="url(#tg)"/><text x="160" y="20" text-anchor="middle" font-size="8" fill="#fff" font-weight="700">Untuk Anda</text><g class="bn"><line x1="155" y1="112" x2="150" y2="150" stroke="#3A3F63" stroke-width="8" stroke-linecap="round"/><line x1="165" y1="112" x2="172" y2="150" stroke="#3A3F63" stroke-width="8" stroke-linecap="round"/><circle cx="148" cy="153" r="5" fill="#fff"/><circle cx="174" cy="153" r="5" fill="#fff"/>${P2(160,72,.62,{hr:'#2B2F4A',tp:'#FF4F79'})}<g class="aL"><line x1="150" y1="96" x2="134" y2="122" stroke="#F2C9A0" stroke-width="6" stroke-linecap="round"/></g><g class="aR"><line x1="170" y1="96" x2="186" y2="122" stroke="#F2C9A0" stroke-width="6" stroke-linecap="round"/></g></g><text x="206" y="110" font-size="13" text-anchor="middle">❤️</text><text x="206" y="130" font-size="13" text-anchor="middle">💬</text><text x="206" y="150" font-size="13" text-anchor="middle">↪️</text><text x="108" y="168" font-size="7.5" fill="#fff" font-weight="700">@sinta.fiktif</text><text x="108" y="178" font-size="6.5" fill="#fff" opacity=".85">joget di acara sekolah #fyp</text><g class="bb"><rect x="4" y="50" width="94" height="20" rx="10" fill="#fff"/><text x="12" y="64" font-size="9" fill="#12203A">Kok kaku banget 🤣</text></g><g class="bb b2"><rect x="224" y="86" width="92" height="20" rx="10" fill="#fff"/><text x="232" y="100" font-size="9" fill="#12203A">bikin stitch ah</text></g><g class="bb b3"><rect x="4" y="112" width="94" height="20" rx="10" fill="#fff"/><text x="12" y="126" font-size="9" fill="#12203A">kasihan tapi lucu</text></g></svg>`,
+foto:()=>`<svg viewBox="0 0 320 170"><g transform="rotate(-3 160 85)"><rect x="95" y="10" width="130" height="150" rx="10" fill="#fff"/><rect x="103" y="18" width="114" height="112" rx="6" fill="#CFE3F3"/>${P2(160,72,.85,{hr:'#5A3A22',tp:'#3FA06B',sk:'#E8B48A',m:'o'})}<text x="108" y="150" font-size="9" fill="#12203A">Liat deh foto ini 😂</text></g><text class="fl" x="52" y="60" font-size="30">😂</text><text class="fl2" x="246" y="110" font-size="28">🤣</text><text class="fl" x="250" y="52" font-size="20">👍</text></svg>`,
+takut:()=>`<svg viewBox="0 0 320 190"><defs><linearGradient id="ig" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f09433"/><stop offset=".5" stop-color="#dc2743"/><stop offset="1" stop-color="#bc1888"/></linearGradient></defs><rect x="100" y="4" width="120" height="182" rx="16" fill="#C9D9F2"/><rect x="100" y="4" width="120" height="182" rx="16" fill="none" stroke="url(#ig)" stroke-width="3"/><rect x="108" y="12" width="34" height="3" rx="1.5" fill="#fff"/><rect x="146" y="12" width="34" height="3" rx="1.5" fill="#ffffff88"/><rect x="184" y="12" width="28" height="3" rx="1.5" fill="#ffffff88"/><circle cx="116" cy="28" r="7" fill="url(#ig)"/><text x="127" y="31" font-size="8" font-weight="700" fill="#12203A">gita.fiktif</text>${P2(160,92,.95,{hj:1,hr:'#4A3B2A',tp:'#E8A33D',m:'f'})}<g transform="rotate(-6 160 160)"><rect x="124" y="146" width="72" height="18" rx="9" fill="#fff"/><text x="160" y="158" text-anchor="middle" font-size="9" font-weight="700" fill="#12203A">#ootd 😬</text></g><text x="108" y="180" font-size="8" fill="#12203A">👁 20 orang melihat</text></svg>`,
+abu:()=>`<svg viewBox="0 0 320 170"><rect x="0" y="130" width="320" height="40" fill="#E6C99B" opacity=".5"/><circle cx="160" cy="170" r="40" fill="none" stroke="#fff" stroke-width="2" opacity=".6"/>${P2(62,72,.8,{hr:'#1C1C1C',tp:'#3FA06B',sk:'#E8B48A'})}${P2(160,72,.8,{hr:'#5A3A22',tp:'#7C5CFF'})}<circle cx="258" cy="72" r="32" fill="none" stroke="#E8A33D" stroke-width="3" stroke-dasharray="5 4"/>${P2(258,72,.8,{hr:'#2B2F4A',tp:'#C84642',m:'f',sk:'#D49A72'})}<g class="bb"><rect x="30" y="6" width="64" height="20" rx="10" fill="#fff"/><text x="62" y="20" text-anchor="middle" font-size="10" fill="#12203A">wkwk 😂</text></g><g class="bb b2"><rect x="128" y="6" width="64" height="20" rx="10" fill="#fff"/><text x="160" y="20" text-anchor="middle" font-size="10" fill="#12203A">haha 🤣</text></g><g class="bb b3"><rect x="222" y="6" width="72" height="20" rx="10" fill="#fff"/><text x="258" y="20" text-anchor="middle" font-size="10" fill="#12203A">haha iya…</text></g></svg>`,
+anon:()=>trio('?'),diam:()=>trio('…'),masalah:()=>trio('⚖️'),saling:()=>trio('⚡'),seksual:()=>trio('🔒')};
+function fx(t){if(fast)return;const E={r:['😢','😭','💔','😞','😔'],o:['💚','🛡️','🤝','✨','💪'],w:['😐','💭']}[t],n={r:44,o:30,w:8}[t],box=$('fx');
+ for(let i=0;i<n;i++){const s=document.createElement('span');s.textContent=E[i%E.length];s.style.left=Math.random()*94+'%';s.style.fontSize=(18+Math.random()*20)+'px';s.style.setProperty('--d',(t==='r'?1.2+Math.random()*1.4:2+Math.random()*2)+'s');s.style.setProperty('--r',(Math.random()*360-180)+'deg');s.style.animationDelay=Math.random()*(t==='r'?.9:1.2)+'s';if(t==='o')s.className='up';box.appendChild(s);setTimeout(()=>s.remove(),5200)}
+ if(t==='r'){const c=document.querySelector('.chat');c.classList.remove('shake');void c.offsetWidth;c.classList.add('shake')}}
+function vic(t,n){const L={r:['n','#8FA1B8','😢','💔','Terpuruk'],w:['f','#B8C4D0','😔','💭','Masih sendirian'],o:['s','#BDEBD3','🥹','💚','Merasa aman']}[t];
+ return `<div class="vic"><svg viewBox="0 0 320 120"><rect width="320" height="120" rx="16" fill="${L[1]}"/>${P2(90,62,.9,{hr:'#2B2F4A',tp:t==='o'?'#3FA06B':'#6B7F9A',m:L[0]})}${t==='r'?'<path d="M82 66q-2 8 0 12M98 66q2 8 0 12" stroke="#4aa3ff" stroke-width="2.5" fill="none" stroke-linecap="round"/>':''}<text class="fl" x="150" y="48" font-size="26">${L[2]}</text><text class="fl2" x="190" y="78" font-size="26">${L[3]}</text><text x="150" y="104" font-size="13" font-weight="700" fill="#12203A">${n}: ${L[4]}</text></svg></div>`}
+function setMode(k){P.mode=k;save();cases()}
+const SMA={
+foto:{m:'Rani|Gaes liat deh fotonya Rafi pas kaget 🤣~Dika|Buset jadi stiker nih wkwk~Salsa|Kasian sih tapi lucu parah sumpah',p:[0,'Rani|Udah masuk grup angkatan lho, auto fyp nih'],t:[['Spam emoji ketawa biar gak dibilang kudet','Forward ke grup lain biar makin rame','Cuek aja terus keluar grup','Gak ikut nyebar, DM Rafi buat nanya kabar'],['Lapor guru BK, fotonya gak aku forward','Ajak temen yang peduli lapor bareng dan minta take down','Ngegas di grup biar semuanya stop','Biarin aja, ntar juga ke-skip sendiri']]},
+anon:{m:'Akun_anon|Siapa sih yang pick me banget di kelas 12 IPS? 🙄~Dika|Wkwk pasti Nadia lah~Salsa|Iya sih, kayaknya dia deh',p:[0,'Nadia|Capek banget gue… kok semua orang nuduh gue sih?'],t:[['Ikut nebak biar seru','Gak ikut nebak, screenshot buat bukti tapi gak disebar','Bales akunnya pake roasting juga'],['DM Nadia: nanya kabar, dengerin dia','Report akunnya dan kasih tau guru BK pake bukti','Pura-pura gak liat, bukan urusanku']]},
+diam:{m:'Raka|Eh Bima kemarin nangis di toilet loh 🤣~Dika|HAHA serius lu?~Salsa|(banyak yang read doang, gak ada yang bales)',p:[0,'Bima|Plis jangan spill ke siapa-siapa ya'],t:[['Ikut diem aja, ntar juga ada yang negur','Chat singkat: udah, ini bukan bahan bercandaan','DM Bima nanya kabarnya'],['Janji gak bakal spill dan gak ngapa-ngapain','Temenin Bima ngomong ke guru BK, sesuai persetujuannya','Spill ke grup biar semua tau dan berhenti']]},
+abu:{m:'Fikri|Dimas kemarin jatuh pas basket kayak karung beras wkwk~Aldo|Auto jadi bahan roasting seminggu nih~Dimas|Haha iya bro…',p:[0,'Dimas|Udahlah gak usah dibahas. Gue lagi capek aja'],t:[['Ikut roasting, kan sama-sama bestie','DM Dimas: Dim, lu oke gak?','Tegur di grup: kalian udah kelewatan'],['Hargai, tapi bilang: gue ada kalo lu mau cerita','Anggap beres, lanjut chat kayak biasa','Ngomong empat mata ke Fikri soal roastingnya, tanpa spill soal Dimas']]},
+tiktok:{m:'Komentar|Jogetnya kaku parah sih 🤣~Akun_xyz|Ini yang kelas 11 IPA 3 kan? Sering jadi bahan~Dewi|Wkwk bikin stitch ah, fyp pasti',p:[0,'Sinta|Jadi males masuk sekolah gara-gara ini…'],t:[['Komen atau bikin stitch biar ikut fyp','Report komen yang ngehina lewat fitur Laporkan','Skip aja, lanjut scroll'],['DM: videonya bagus kok, jangan didengerin. Mau cerita?','Bales komen jahat satu-satu pake emosi','Ajak temen sekelas report bareng dan cerita ke wali kelas']]},
+takut:{m:'Gita|Lintang pake outfit itu lagi 😬 #ootd~Nabila|Hahaha jangan bilang siapa-siapa ya~Sistem|Kamu termasuk 20 orang di Close Friends',p:[0,'Nabila|Eh kok lu gak ikut komen? Jangan-jangan lu pro dia ya?'],t:[['Ikut reshare biar aman dari mereka','Diem dulu karena takut, gak ngapa-ngapain','DM Lintang dan simpan screenshot tanpa disebar'],['Jawab santai tanpa milih pihak, terus lapor diem-diem ke BK','Curhat ketakutanmu ke temen yang dipercaya, cari bantuan bareng','Minta maaf ke Nabila dan ikut ngatain Lintang']]},
+masalah:{m:'Raka|Si Bagas tuh red flag banget, sok paling pinter mulu~Dika|Nih VN dia lagi pamer, spill aja yuk~Salsa|Hahaha biar kapok sekalian',p:[0,'Raka|Tapi dia emang suka nyontek terus ngadu ke guru lho!'],t:[['Ikut spill, dia emang pantes dapet balasan','Bela mati-matian: Bagas gak salah apa-apa','Gak ikut nyebar, usul: kalo ada masalah, omongin langsung atau lewat guru'],['Akuin salahnya, tapi tegur perilakunya, bukan permaluin orangnya','Diem aja, takut dibilang belain dia','Ikut bilang: ya biar kapok']]},
+saling:{m:'Tari|Biar semua tau Vina tuh fake banget~Vina|Lu duluan yang mulai. Nih gue spill chat lu~Dewi|Team Tari vs Team Vina nih, seru parah',p:[0,'Tari|Gue udah mau spill chat Vina ke satu angkatan'],t:[['Milih satu pihak dan ikut nyerang yang lain','Nonton aja, urusan mereka berdua','Gak milih pihak: DM masing-masing, tanya kabar, ajak stop dulu'],['Minta mereka stop nyebar, terus ajak keduanya ngobrol sama guru BK sebagai penengah','Bantu Tari spill chat Vina biar adil','Lapor BK tapi cuma bilang Vina yang salah']]},
+seksual:{m:'Dion|Eh ini foto pribadinya Alya kan? 😏~Raka|Wah beneran nyebar, udah masuk grup sebelah~Dewi|Kasian sih, tapi kok dia mau ngirim sih',p:[0,'Alya|Gue takut banget. Fotonya udah ke mana-mana'],t:[['Ikut bahas atau minta dikirimin fotonya','Nyalahin Alya: ngapain sih dia ngirim foto gitu','Diem aja, takut ikut kena','Gak nyebar, gak nyimpen fotonya, DM Alya: ini bukan salah lu'],['Temenin Alya ngomong ke guru BK atau orang dewasa tepercaya, bantu report ke platform tanpa forward fotonya','Screenshot fotonya buat bukti, simpen di galeri','Bilang ke Alya: udah diemin aja, ntar juga reda']]}};
+function cv(c){const o=SMA[c.id];if(P.mode!=='sma'||!o)return c;return{...c,m:o.m,r:c.r.map((R,i)=>[o.p[i]||R[0],R[1],R[2].map((x,j)=>[o.t[i][j]||x[0],...x.slice(1)])])}}
+const BKJ=['Foto atau video disebarkan','Komentar atau pesan menghina','Akun anonim','Ancaman','Lainnya'],BKR=['Saksi','Korban','Teman korban','Tidak ingin menyebut'];
+function chs(id,a){$(id).innerHTML=a.map(x=>`<button class="chip" aria-pressed="false">${x}</button>`).join('');$(id).querySelectorAll('.chip').forEach(b=>b.onclick=()=>$(id).querySelectorAll('.chip').forEach(y=>y.setAttribute('aria-pressed',y===b)))}
+function bkInit(){$('bkf').style.display='';$('bko').style.display='none';chs('bkr',BKR);chs('bkj',BKJ);$('bkt').value=''}
+function bkSend(){$('bkt').value='';$('bkc').textContent='BK-'+Math.random().toString(36).slice(2,6).toUpperCase();$('bkf').style.display='none';$('bko').style.display='';scrollTo(0,0)}
+const BD=[{id:'BK-A1',j:'Foto disebarkan',p:'WhatsApp',s:'Saksi',st:'Baru',u:1,t:'Foto teman sekelas dibagikan ke grup angkatan. Pelapor menyimpan tangkapan layar.'},{id:'BK-B2',j:'Komentar menghina',p:'TikTok',s:'Teman korban',st:'Ditangani',u:0,t:'Video siswa dikomentari ejekan. Teman korban meminta pendampingan.'},{id:'BK-C3',j:'Akun anonim',p:'Instagram',s:'Anonim',st:'Baru',u:0,t:'Akun tanpa nama menyebarkan tebakan identitas siswa.'},{id:'BK-D4',j:'Saling serang',p:'Instagram',s:'Saksi',st:'Selesai',u:0,t:'Dua siswa saling membalas komentar. Sudah dimediasi oleh BK.'}];
+let bdf='Semua';
+function bdr(){const n=s=>BD.filter(x=>x.st===s).length;
+ $('bdS').innerHTML=[['Baru',n('Baru')],['Ditangani',n('Ditangani')],['Selesai',n('Selesai')],['Mendesak',BD.filter(x=>x.u&&x.st!=='Selesai').length]].map(a=>`<div class="sk on"><span class="e">${a[1]}</span>${a[0]}</div>`).join('');
+ $('bdF').innerHTML=['Semua','Baru','Ditangani','Selesai'].map(k=>`<button class="chip" aria-pressed="${k===bdf}" onclick="bdf='${k}';bdr()">${k}</button>`).join('');
+ $('bdL').innerHTML=BD.filter(x=>bdf==='Semua'||x.st===bdf).map(x=>`<div class="case"><h3 style="font-size:17px">${x.j}${x.u&&x.st!=='Selesai'?'<span class="badge" style="background:var(--rks);color:var(--rk)">Mendesak</span>':''}</h3><div class="meta">${x.id} · ${x.p} · pelapor: ${x.s} · status: <b>${x.st}</b></div><p>${x.t}</p>${x.st==='Baru'?`<button class="btn" onclick="bds('${x.id}','Ditangani')">Tandai sedang ditangani</button>`:x.st==='Ditangani'?`<button class="btn ghost" style="margin-top:0" onclick="bds('${x.id}','Selesai')">Tandai selesai</button>`:''}</div>`).join('')||'<p class="sub">Tidak ada laporan.</p>';
+ $('bdB').innerHTML=[['Menyebarkan ulang konten',12,1],['Diam saja',31,0],['Dukungan pribadi ke korban',29,0],['Melapor ke BK',18,0],['Memihak salah satu',10,1]].map(a=>`<div class="lab"><span>${a[0]}</span><b>${a[1]}%</b></div><div class="bar${a[2]?' r':''}"><div style="width:${a[1]*2}%"></div></div>`).join('')}
+function bds(id,s){BD.find(x=>x.id===id).st=s;bdr()}
+function warn(c){return new Promise(r=>{const el=$('intro');el.innerHTML=`<div class="clk">Peringatan konten</div><p class="cap" style="max-width:320px">${c.cw}</p><button class="btn" id="w1" style="max-width:320px">Aku siap, lanjut</button><button class="btn ghost" id="w2" style="max-width:320px;color:#fff;border-color:#fff">Kembali</button>`;el.classList.add('on');$('w1').onclick=()=>{el.classList.remove('on');r(1)};$('w2').onclick=()=>{el.classList.remove('on');r(0)}})}
+function dom(){const n=Math.round(10+S.sp*1.2),f=Math.min(48,Math.ceil(n/130*48));return`<div class="panel"><h3>Efek Domino</h3><div class="dm">${Array.from({length:48},(_,i)=>`<i class="${i<f?(S.sp>=50?'x r':'x'):''}" style="animation-delay:${i*25}ms"></i>`).join('')}</div><p style="margin-top:8px">Perkiraan ${n} orang kini melihat konten ini. Titik yang menyala menunjukkan sejauh mana ia menyebar.</p></div>`}
+function go(v){document.body.classList.remove('bad','good');document.querySelectorAll('.view').forEach(e=>e.classList.toggle('on',e.id===v));if(v==='cases')cases();if(v==='bk')bkInit();if(v==='bkd')bdr();if(v==='home')hp();scrollTo(0,0)}
+function sheet(o){$('sheet').classList.toggle('on',o)}
+function hp(){$('hp').textContent=P.done.length?`Kamu sudah menyelesaikan ${P.done.length} dari ${C.length} kasus.`:''}
+function cases(){$('cl').innerHTML=C.map((c,i)=>{const d=P.done.includes(c.id);return`<div class="case"><div class="ci">${ART[c.id]}</div><h3>${c.n}${d?'<span class="badge">Selesai</span>':''}${c.cw?'<span class="badge" style="background:var(--wns);color:var(--wn)">Sensitif</span>':''}</h3><p>${c.d}</p><div class="meta">⏱ 3–5 menit · 🔀 2 keputusan bercabang</div><button class="btn" onclick="play(${i})">${d?'Main lagi':'Mulai kasus'}</button></div>`}).join('');
+ $('sg').innerHTML=Object.entries(SK).map(([k,v])=>`<button class="sk ${P.sk.includes(k)?'on':'lk'}" onclick="sk('${k}')"><span class="e">${P.sk.includes(k)?v[0]:'❔'}</span>${v[1]}</button>`).join('');$('sd').textContent='Ketuk kartu untuk melihat artinya.';$('md').innerHTML=['smp','sma'].map(k=>`<button class="chip" aria-pressed="${P.mode===k}" onclick="setMode('${k}')">${k.toUpperCase()}</button>`).join('');$('mdd').textContent=P.mode==='sma'?'Bahasa dan situasi lebih dekat dengan anak SMA.':'Bahasa dan situasi untuk anak SMP.'}
+function sk(k){$('sd').textContent=(P.sk.includes(k)?'':'Belum terbuka. ')+SK[k][1]+': '+SK[k][2]}
+const IN={seksual:['Selasa, 21.45','Grup Angkatan','Sebuah foto pribadi dibagikan tanpa izin','🔒','Foto itu mulai berpindah dari grup ke grup…'],saling:['Jumat, 22.10','Instagram','Tari dan Vina saling membalas komentar','⚡','Komentarnya makin panas, dan orang mulai memihak…'],masalah:['Kamis, 20.50','Grup Angkatan','Voice note mulai dibagikan','🎙️','Voice note itu menyebar satu per satu…'],abu:['Rabu, 15.32','Geng Kantin','47 pesan baru','😄','Mereka memang sering saling ejek…'],tiktok:['Sabtu, 19.20','TikTok','Video dari acara sekolah mulai ramai','🔥','Komentar berdatangan satu per satu…'],takut:['Senin, 21.30','Instagram','Gita membagikan sebuah story','👁️','Kamu termasuk yang bisa melihatnya…'],foto:['Kamis, 20.14','Grup Kelas 10A','32 pesan baru','😂','Sebuah foto mulai dibagikan di grup kelas…'],anon:['Selasa, 19.40','Akun sekolah','Komentar baru dari akun anonim','👀','Kolom komentar mulai ramai…'],diam:['Jumat, 21.05','Grup Nongkrong Kelas 11','12 pesan baru','👀','Banyak yang membaca, tidak ada yang membalas…']};
+async function intro(c){const d=IN[c.id],el=$('intro');let sx=0;el.innerHTML=`<button class="skip">Lewati ›</button><div class="clk">${d[0]}</div><div class="notif"><b>${d[1]}</b><span>${d[2]}</span></div><div class="ph" id="ph"></div><div class="cnt"><span id="ic">0</span> ${d[3]}</div><p class="cap">${d[4]}</p>`;el.classList.add('on');el.querySelector('.skip').onclick=()=>sx=1;
+ const w2=async ms=>{for(let t=0;t<ms&&!sx;t+=100)await wait(100)};await w2(1800);
+ for(const x of c.m.split('~').slice(0,3)){if(sx)break;const[a,b]=x.split('|');$('ph').insertAdjacentHTML('beforeend',`<div class="msg">${av(a)}<div class="bub">${b}</div></div>`);for(let i=0;i<8&&!sx;i++){$('ic').textContent=+$('ic').textContent+2;await wait(120)}await w2(500)}
+ await w2(900);el.classList.remove('on')}
+async function say(w,t){const m=document.createElement('div');m.className='msg';m.innerHTML=`${av(w)}<div class="bub"><span class="dots"><i></i><i></i><i></i></span></div>`;$('feed').appendChild(m);m.scrollIntoView({block:'center',behavior:fast?'auto':'smooth'});await wait(750);m.lastChild.textContent=t}
+async function msgs(s){for(const x of s.split('~')){const[w,t]=x.split('|');await say(w,t)}}
+function mt(){$('sfb').style.width=S.sf+'%';$('spb').style.width=S.sp+'%';$('sfv').textContent=S.sf>=70?'Terbantu':S.sf>=40?'Cukup':'Terpuruk';$('spv').textContent='≈ '+Math.round(10+S.sp*1.2)+' orang melihat'}
+async function play(i){const c=cv(C[i]);S={i,r:0,sf:40,sp:40,p:[],g:[],b:1};$('feed').innerHTML='';$('fb').innerHTML='';$('opts').innerHTML='';$('q').textContent='';$('scene').innerHTML=(SC[c.id]||(()=>''))();$('ctop').className='top '+(c.pf||'');$('ctop').innerHTML=`${c.g} <span>· ${c.n}</span>`;mt();if(c.cw&&!(await warn(c)))return;go('play');await intro(c);await wait(300);await msgs(c.m);rnd()}
+async function rnd(){const R=cv(C[S.i]).r[S.r];if(R[0])await msgs(R[0]);$('q').textContent=R[1];$('opts').innerHTML='';[...R[2]].sort(()=>Math.random()-.5).forEach(o=>{const b=document.createElement('button');b.className='opt';b.textContent=o[0];b.onclick=()=>pick(o,b);$('opts').appendChild(b)});S.b=0;$('q').scrollIntoView({block:'start',behavior:fast?'auto':'smooth'})}
+async function pick(o,b){if(S.b)return;S.b=1;document.querySelectorAll('.opt').forEach(x=>x.classList.add(x===b?'pick':'done'));
+ S.p.push(o);S.sf=Math.max(0,Math.min(100,S.sf+o[2][0]));S.sp=Math.max(0,Math.min(100,S.sp+o[2][1]));if(o[6]&&!S.g.includes(o[6]))S.g.push(o[6]);
+ const p=document.createElement('div');p.className='pill';p.textContent='Kamu memilih: '+o[0];$('feed').appendChild(p);mt();fx(o[1]);if(o[1]==='r')document.body.classList.add('bad');if(o[1]==='o')document.body.classList.add('good');
+ if(o[5])await msgs(o[5]);fb(o)}
+function fb(o){const c=C[S.i],last=S.r===c.r.length-1,T={v:o[4],t:OT[o[1]],y:YU[o[1]]};
+ $('fb').innerHTML=`${vic(o[1],c.v)}<div class="tier ${TC[o[1]]}"><h3>${TH[o[1]]}</h3><p>${o[3]}</p></div>${dom()}<div class="panel"><h3>Ganti sudut pandang</h3><div class="chips"><button class="chip" aria-pressed="false" data-k="v">Sisi ${c.v}</button><button class="chip" aria-pressed="false" data-k="t">Teman sekelas</button><button class="chip" aria-pressed="false" data-k="y">Kamu</button></div><p id="pv" style="margin-top:10px">Ketuk salah satu untuk melihat bagaimana pilihanmu terasa bagi orang lain.</p></div><button class="btn" id="nx">${last?'Lihat ringkasan':'Lanjut ke situasi berikutnya'}</button>`;
+ document.querySelectorAll('#fb .chip').forEach(x=>x.onclick=()=>{document.querySelectorAll('#fb .chip').forEach(y=>y.setAttribute('aria-pressed',y===x));$('pv').textContent=T[x.dataset.k]});
+ $('nx').onclick=()=>{document.body.classList.remove('bad','good');$('fb').innerHTML='';if(last)end();else{S.r++;rnd()}};
+ $('fb').scrollIntoView({block:'start',behavior:fast?'auto':'smooth'})}
+function end(){const c=C[S.i];S.g.forEach(k=>{if(!P.sk.includes(k))P.sk.push(k)});if(!P.done.includes(c.id))P.done.push(c.id);save();
+ const E=S.sf>=70?c.v+' merasa terbantu dan penyebaran bisa dihentikan.':S.sf>=45?'Sebagian keadaan membaik, tetapi masih ada langkah yang bisa dicoba.':'Keadaan memburuk. Coba jalur lain dan lihat apa yang berubah.';
+ $('end').innerHTML=`<div class="win"><svg viewBox="0 0 80 90" width="84" height="94"><path class="fa" d="M40 4l32 12v26c0 22-14 36-32 44C22 78 8 64 8 42V16z"/><path d="M26 44l10 10 20-22" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h2>Kasus selesai</h2><p class="sub">${E}</p><div class="panel"><div class="lab"><span>Rasa aman ${c.v}</span><b>${S.sf}/100</b></div><div class="bar"><div style="width:${S.sf}%"></div></div><div class="lab"><span>Penyebaran konten</span><b>≈ ${Math.round(10+S.sp*1.2)} orang melihat</b></div><div class="bar r" style="margin-bottom:0"><div style="width:${S.sp}%"></div></div></div>
+ <div class="panel"><h3>Pilihanmu</h3><ul class="ol">${S.p.map(o=>`<li>${{o:'🟢',w:'🟡',r:'🔴'}[o[1]]} ${o[0]}</li>`).join('')}</ul></div>
+ <div class="panel"><h3>Kartu keterampilan</h3>${S.g.length?`<div class="sg">${S.g.map(k=>`<div class="sk on"><span class="e">${SK[k][0]}</span>${SK[k][1]}</div>`).join('')}</div>`:'<p>Belum ada kartu baru. Coba jalur lain untuk membukanya.</p>'}</div>
+ ${c.id==='seksual'?`<div class="panel"><h3>Butuh bantuan?</h3><p>Jangan teruskan atau simpan foto pribadi orang lain. Cukup catat akun, tautan, dan waktu kejadian. Kalau kamu atau temanmu mengalami hal serupa, ceritakan ke guru BK atau orang dewasa yang kamu percaya. Kamu juga bisa menghubungi layanan SAPA 129 dari KemenPPPA lewat telepon 129 atau WhatsApp 08111-129-129.</p></div>`:''}<div class="panel"><details><summary>Jalur lapor yang aman</summary><ol class="safe"><li>Jangan teruskan foto atau tangkapan layar ke siapa pun.</li><li>Kirim pesan pribadi ke korban bahwa kamu di pihaknya.</li><li>Ceritakan ke guru BK atau orang dewasa yang kamu percaya.</li><li>Laporkan unggahan lewat fitur lapor di aplikasi.</li></ol></details></div>
+ <button class="btn" onclick="play(${S.i})">Coba pilihan lain</button><button class="btn ghost" onclick="go('bk')">Lapor ke BK</button><button class="btn ghost" onclick="go('cases')">Kembali ke daftar kasus</button>`;go('end')}
+document.querySelector('#home .btn').onclick=()=>go(P.seen?'cases':'how');document.body.insertAdjacentHTML('beforeend','<div id="fx" aria-hidden="true"></div>');document.querySelector('.art').innerHTML=HERO();document.querySelector('#home .btn').insertAdjacentHTML('afterend','<p class="sub" id="hp" style="margin:12px 0 0;text-align:center"></p>');hp();$('hp').insertAdjacentHTML('afterend',`<p class="sub" style="margin:22px 0 8px;text-align:center">Menu lainnya</p><div class="mn"><button class="mi" onclick="go('about')"><span>ℹ️</span>Tentang SAKTI-D</button><button class="mi" onclick="go('how')"><span>📖</span>Cara bermain</button><button class="mi" onclick="go('bk')"><span>📝</span>Lapor ke BK</button><button class="mi" onclick="go('bkd')"><span>🧑‍🏫</span>Dasbor Guru BK (contoh)</button></div>`);
+document.querySelector('.logo').onkeydown=e=>{if(e.key==='Enter')go('home')};
+</script>
+</body>
+</html>
